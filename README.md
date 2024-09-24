@@ -1,5 +1,3 @@
-Aqui está uma sugestão de descrição para o repositório GitHub do projeto **FastLocation**:
-
 ---
 
 # FastLocation 📍
