@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.fast_location" // Altere para o namespace do seu aplicativo, por exemplo, "com.example.fast_location"
+    namespace = "com.example.fast_location" 
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
