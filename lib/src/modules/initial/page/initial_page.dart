@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import '../../routes/app_routes.dart';
+import '../../../routes/app_routes.dart';
 
 class InitialPage extends StatefulWidget {
   @override

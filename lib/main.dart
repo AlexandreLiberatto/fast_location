@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'src/routes/app_routes.dart';
+import 'src/shared/storage/storage_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageConfig.initializeHive();
   runApp(FastLocationApp());
 }
 

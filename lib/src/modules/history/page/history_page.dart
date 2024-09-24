@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../controller/history_controller.dart';
 import '../../home/components/address_list_component.dart';
 import '../../home/model/address_model.dart';
+import '../../home/repositories/address_local_repository.dart'; // Adicione esta importação se necessário
 
 class HistoryPage extends StatefulWidget {
   @override

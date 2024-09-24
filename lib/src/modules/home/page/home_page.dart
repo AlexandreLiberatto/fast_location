@@ -4,7 +4,10 @@ import '../controller/home_controller.dart';
 import '../components/address_list_component.dart';
 import '../components/last_address_component.dart';
 import '../components/empty_search_component.dart';
-import '../../routes/app_routes.dart';
+import '../../../routes/app_routes.dart';
+import '../service/address_service.dart';  // Adicione as importações necessárias
+import '../repositories/address_api_repository.dart';  // Adicione as importações necessárias
+import '../repositories/address_local_repository.dart';  // Adicione as importações necessárias
 import 'package:mobx/mobx.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:geocoding/geocoding.dart';
@@ -20,8 +23,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Inicialize o controller com as dependências necessárias
-    // Certifique-se de injetar o AddressService corretamente
     controller = HomeController(AddressService(
       apiRepository: AddressApiRepository(),
       localRepository: AddressLocalRepository(),
