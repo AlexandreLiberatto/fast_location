@@ -29,13 +29,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController cepController = TextEditingController();
   String? address;
+  List<String> searchHistory = []; // Histórico de endereços
 
   void buscarEndereco(String cep) async {
     try {
       final response = await DioClient.dio.get('/$cep/json/');
       if (response.statusCode == 200) {
+        String foundAddress =
+            '${response.data['logradouro']}, ${response.data['bairro']}, ${response.data['localidade']}';
         setState(() {
-          address = '${response.data['logradouro']}, ${response.data['bairro']}, ${response.data['localidade']}';
+          address = foundAddress;
+          searchHistory.add(foundAddress); // Adiciona ao histórico
         });
       } else {
         throw Exception('Erro ao buscar endereço');
@@ -43,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print('Erro: $e');
       setState(() {
-        address = null; // Limpa o endereço em caso de erro
+        address = null;
       });
     }
   }
@@ -51,10 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void abrirGoogleMaps() async {
     if (address != null) {
       final url = 'https://www.google.com/maps/search/?api=1&query=$address';
-      if (await canLaunch(url)) {
-        await launch(url);
+      if (await canLaunchUrl(Uri.parse(url))) {
+        await launchUrl(
+          Uri.parse(url),
+          mode: LaunchMode.externalApplication, // Abre no app do navegador ou Google Maps
+        );
       } else {
-        throw 'Could not launch $url';
+        throw 'Não foi possível lançar $url';
       }
     } else {
       print('Endereço não disponível');
@@ -69,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
           image: DecorationImage(
             image: AssetImage("lib/src/shared/img/background.jpeg"),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
           ),
         ),
         child: Center(
@@ -118,6 +126,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: abrirGoogleMaps,
                         child: Text('Ver Rota no Google Maps'),
                       ),
+                    ],
+                    if (searchHistory.isNotEmpty) ...[
+                      SizedBox(height: 20),
+                      Text(
+                        'Endereços pesquisados recentemente:',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      for (var addr in searchHistory.reversed) // Exibe do mais recente
+                        ListTile(
+                          title: Text(addr),
+                          onTap: () {
+                            setState(() {
+                              address = addr;
+                            });
+                          },
+                        ),
                     ],
                   ],
                 ),
