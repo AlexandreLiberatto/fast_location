@@ -23,6 +23,7 @@ dependencies:
   path_provider_ios: ^2.0.9
   map_launcher: ^3.5.0
   geocoding: ^2.1.1
+  url_launcher: ^6.0.20 
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +35,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/src/shared/img/background.jpeg # Adicione esta linha para incluir a imagem
