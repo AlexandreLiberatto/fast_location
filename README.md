@@ -7,7 +7,6 @@ FastLocation é um aplicativo móvel desenvolvido em Flutter que permite realiza
 <p align="center">
   <img src="img/fastlocatio1.png" alt="Texto Alternativo" width="auto">
   <img src="img/fastlocatio2.png" alt="Texto Alternativo" width="auto">
-  <img src="img/fastlocatio3.png" alt="Texto Alternativo" width="auto">
 </p>
 <p align="center">
   <img src="img/fastlocatio4.png" alt="Texto Alternativo" width="auto">
